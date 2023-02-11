@@ -5,37 +5,39 @@ import {useState, useEffect} from 'react';
 
 function App() {
   const [fact, setFact] = useState();
-  const [word, setWord] = useState();
+  const [url, setUrl] = useState();
 
+  
   useEffect(() => {
+    const fetchFact = async () => {
+      const res = await fetch('https://catfact.ninja/fact');
+      const data = await res.json();
+      setFact(data.fact);
+    } 
     fetchFact();
-  }, []);
+  }, [])
+  
+  useEffect(() => {
+    if (!fact) return;
+    const word = fact.split(' ', 1)[0];
 
-  useEffect((word) => {
-    fetchCat(word);
-  }, [word]);
-
-  const fetchFact = async () => {
-    const res = await fetch('https://catfact.ninja/fact')
-    const data = await res.json();
-    setFact(data.fact);
-    setWord(data.fact.split(' ', 1)[0])
-  } 
-
-  const fetchCat = async (word) => {
-    const res = await fetch(`https://cataas.com/cat/says/${word}`)
-    console.log(res);
-    
-  }
-
-  console.log(word);
+    const fetchCat = async () => {
+      const res = await fetch(`https://cataas.com/cat/says/${word}}`)
+      setUrl(res.url)
+    }
+    fetchCat();
+  }, [fact]);
+  
   
   
   return (
     <>
       <h1>About Cats</h1>
       {fact && 
-      <p>{fact}</p>
+      <>
+        <p>{fact}</p>
+        <img src={url}></img>
+      </>
     }
     </>
   );
