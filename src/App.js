@@ -6,14 +6,15 @@ function App() {
   const [url, setUrl] = useState();
   
   useEffect(() => {
-    const fetchFact = async () => {
-      const res = await fetch('https://catfact.ninja/fact');
-      const data = await res.json();
-      setFact(data.fact);
-    } 
     fetchFact();
   }, [])
   
+  const fetchFact = async () => {
+    const res = await fetch('https://catfact.ninja/fact');
+    const data = await res.json();
+    setFact(data.fact);
+  } 
+
   useEffect(() => {
     if (!fact) return;
     const word = fact.split(' ', 1)[0];
@@ -30,10 +31,13 @@ function App() {
       <h1 className='title'>About Cats</h1>
       <div className='cat--box'>
         {fact && 
-          <p className='cat--description'>{fact}</p>
+          <div className='description--box'>
+            <button type='button' className='button' onClick={() => fetchFact()}>New Fact</button>
+            <p className='cat--description'>{fact}</p>
+          </div>
         }
         {url &&
-          <img className='cat--image' src={url}></img>
+          <img className='cat--image' src={url} alt='cat'></img>
         }
       </div>
     </main>
