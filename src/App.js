@@ -27,17 +27,19 @@ function App() {
   }, [fact]);
   
   return (
-    <main className='container'>
+    <main className='main'>
       <h1 className='title'>About Cats</h1>
-      <div className='cat--box'>
+      <div className='container'>
         {fact && 
-          <div className='description--box'>
+          <div className='container--box'>
             <button type='button' className='button' onClick={() => fetchFact()}>New Fact</button>
             <p className='cat--description'>{fact}</p>
           </div>
         }
         {url &&
-          <img className='cat--image' src={url} alt='cat'></img>
+          <div className='container--box'>
+            <img className='cat--image' src={url} alt='cat'></img>
+          </div>
         }
       </div>
     </main>
