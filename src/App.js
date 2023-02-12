@@ -1,12 +1,9 @@
+import './App.css';
 import {useState, useEffect} from 'react';
-
-// - Facts Random: https://catfact.ninja/fact
-//- Imagen random: https://cataas.com/cat/says/hello
 
 function App() {
   const [fact, setFact] = useState();
   const [url, setUrl] = useState();
-
   
   useEffect(() => {
     const fetchFact = async () => {
@@ -28,18 +25,18 @@ function App() {
     fetchCat();
   }, [fact]);
   
-  
-  
   return (
-    <>
-      <h1>About Cats</h1>
-      {fact && 
-      <>
-        <p>{fact}</p>
-        <img src={url}></img>
-      </>
-    }
-    </>
+    <main className='container'>
+      <h1 className='title'>About Cats</h1>
+      <div className='cat--box'>
+        {fact && 
+          <p className='cat--description'>{fact}</p>
+        }
+        {url &&
+          <img className='cat--image' src={url}></img>
+        }
+      </div>
+    </main>
   );
 }
 
