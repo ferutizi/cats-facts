@@ -15,6 +15,7 @@ Prueba técnica consumiendo dos apis públicas: https://catfact.ninja/fact y htt
 ## Tecnologias usadas
 
 - React
+- CSS
 
 # Contacto
 

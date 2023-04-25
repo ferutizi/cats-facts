@@ -1,49 +1,47 @@
-import './App.css';
-import {useState, useEffect} from 'react';
+import './App.css'
+import { useState, useEffect } from 'react'
 
-function App() {
-  const [fact, setFact] = useState();
-  const [url, setUrl] = useState();
-  
+function App () {
+  const [fact, setFact] = useState()
+  const [url, setUrl] = useState()
+
   useEffect(() => {
-    fetchFact();
+    fetchFact()
   }, [])
-  
+
   const fetchFact = async () => {
-    const res = await fetch('https://catfact.ninja/fact');
-    const data = await res.json();
-    setFact(data.fact);
-  } 
+    const res = await fetch('https://catfact.ninja/fact')
+    const data = await res.json()
+    setFact(data.fact)
+  }
 
   useEffect(() => {
-    if (!fact) return;
-    const word = fact.split(' ', 1)[0];
+    if (!fact) return
+    const word = fact.split(' ', 1)[0]
 
     const fetchCat = async () => {
       const res = await fetch(`https://cataas.com/cat/says/${word}}`)
       setUrl(res.url)
     }
-    fetchCat();
-  }, [fact]);
-  
+    fetchCat()
+  }, [fact])
+
   return (
     <main className='main'>
       <h1 className='title'>About Cats</h1>
       <div className='container'>
-        {fact && 
+        {fact &&
           <div className='container--box'>
             <button type='button' className='button' onClick={() => fetchFact()}>New Fact</button>
             <p className='cat--description'>{fact}</p>
-          </div>
-        }
+          </div>}
         {url &&
           <div className='container--box'>
-            <img className='cat--image' src={url} alt='cat'></img>
-          </div>
-        }
+            <img className='cat--image' src={url} alt='cat' />
+          </div>}
       </div>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
